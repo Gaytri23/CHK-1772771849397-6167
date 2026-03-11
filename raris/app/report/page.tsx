@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -195,4 +196,19 @@ export default function ReportWizard() {
             </div>
         </div>
     );
+=======
+import { ReportClientPage } from './client-page';
+
+export default function ReportPage() {
+    // Static fallback categories to bypass Prisma DB Connection errors
+    const categories: any[] = [
+        { id: '1', name: 'Academic Integrity', slug: 'academic', icon: 'Book', color: '#3B82F6', description: 'Plagiarism, cheating, or unfair grading', sortOrder: 1, isActive: true, createdAt: new Date() },
+        { id: '2', name: 'Harassment & Bullying', slug: 'harassment', icon: 'ShieldAlert', color: '#7C3AED', description: 'Any form of harassment, ragging, or abuse', sortOrder: 2, isActive: true, createdAt: new Date() },
+        { id: '3', name: 'Infrastructure & Safety', slug: 'infrastructure', icon: 'Building', color: '#10B981', description: 'Broken equipment, safety hazards, or hygiene issues', sortOrder: 3, isActive: true, createdAt: new Date() },
+        { id: '4', name: 'Financial Irregularities', slug: 'financial', icon: 'Banknote', color: '#F59E0B', description: 'Hidden fees, bribery, or scholarship issues', sortOrder: 4, isActive: true, createdAt: new Date() },
+        { id: '5', name: 'Other Grievances', slug: 'other', icon: 'HelpCircle', color: '#6B7280', description: 'Any other issues not covered above', sortOrder: 5, isActive: true, createdAt: new Date() }
+    ];
+
+    return <ReportClientPage categories={categories} />;
+>>>>>>> 6c3cdc7b (Initial commit)
 }

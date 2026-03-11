@@ -23,7 +23,11 @@ export function GlowButton({ children, variant = "primary", loading, className, 
                     : "bg-transparent border border-primary/40 text-bright hover:bg-primary/10 disabled:opacity-50",
                 className
             )}
+<<<<<<< HEAD
             {...props}
+=======
+            {...(props as any)}
+>>>>>>> 6c3cdc7b (Initial commit)
         >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : children}
         </motion.button>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import React from 'react';
 import Link from 'next/link';
@@ -49,6 +50,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <main className="flex-1 ml-64 min-h-screen">
                 {children}
             </main>
+=======
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { Sidebar } from "@/components/admin/Sidebar";
+import { Topbar } from "@/components/admin/Topbar";
+
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+        redirect("/login");
+    }
+
+    return (
+        <div className="flex min-h-[100svh] bg-base text-text-hi font-sans animated-bg">
+            <Sidebar />
+            <div className="flex-1 flex flex-col min-w-0 h-[100svh] overflow-hidden">
+                <Topbar />
+                <main className="flex-1 p-4 lg:p-8 overflow-y-auto custom-scrollbar">
+                    <div className="max-w-[1600px] mx-auto w-full">
+                        {children}
+                    </div>
+                </main>
+            </div>
+>>>>>>> 6c3cdc7b (Initial commit)
         </div>
     );
 }

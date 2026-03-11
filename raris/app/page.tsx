@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -114,5 +115,28 @@ export default function LandingPage() {
                 </div>
             </footer>
         </div>
+=======
+import { LandingNavbar } from '@/components/landing/LandingNavbar';
+import { HeroSection } from '@/components/landing/HeroSection';
+import { TrustBadges } from '@/components/landing/TrustBadges';
+import { HowItWorksSection } from '@/components/landing/HowItWorksSection';
+import { CategoryShowcase } from '@/components/landing/CategoryShowcase';
+import { StatsSection } from '@/components/landing/StatsSection';
+import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
+import { LandingFooter } from '@/components/landing/LandingFooter';
+
+export default function Home() {
+    return (
+        <>
+            <LandingNavbar />
+            <HeroSection />
+            <TrustBadges />
+            <HowItWorksSection />
+            <CategoryShowcase />
+            <StatsSection />
+            <TestimonialsSection />
+            <LandingFooter />
+        </>
+>>>>>>> 6c3cdc7b (Initial commit)
     );
 }

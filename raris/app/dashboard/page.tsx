@@ -9,8 +9,27 @@ import { RiskBadge } from '@/components/ui/raris/RiskBadge';
 import { complaints } from '@/lib/mockData';
 import { Search, AlertTriangle, FileUp } from 'lucide-react';
 import { fadeUp } from '@/lib/animations';
+<<<<<<< HEAD
 
 export default function StudentDashboard() {
+=======
+import { useRouter } from 'next/navigation';
+
+export default function StudentDashboard() {
+    const router = useRouter();
+
+    React.useEffect(() => {
+        const isAuth = localStorage.getItem('raris_auth') === 'true';
+        if (!isAuth) {
+            router.push('/login');
+            return;
+        }
+        if (localStorage.getItem('raris_role') === 'admin') {
+            router.push('/admin/dashboard');
+        }
+    }, [router]);
+
+>>>>>>> 6c3cdc7b (Initial commit)
     const [tid, setTid] = useState("");
     const [activeCase, setActiveCase] = useState<any>(null);
 

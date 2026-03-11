@@ -1,6 +1,10 @@
 node_modules/
 .env
+.env.local
 dist
 build
 coverage
 npm-debug.log
+.next/
+.vercel/
+*.log

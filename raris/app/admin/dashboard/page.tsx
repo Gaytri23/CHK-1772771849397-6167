@@ -7,13 +7,23 @@ import { RiskBadge } from '@/components/ui/raris/RiskBadge';
 import { StatusBadge } from '@/components/ui/raris/StatusBadge';
 import { CaseDrawer } from '@/components/ui/raris/CaseDrawer';
 import { GlowButton } from '@/components/ui/raris/GlowButton';
+<<<<<<< HEAD
 import { complaints, stats, analyticsData } from '@/lib/mockData';
 import { FileText, ShieldAlert, CheckCircle, Clock, TrendingUp, AlertTriangle } from 'lucide-react';
+=======
+import { stats, analyticsData } from '@/lib/mockData';
+import { FileText, ShieldAlert, CheckCircle, Clock, TrendingUp, AlertTriangle } from 'lucide-react';
+import { useDatabaseStore } from '@/store/useDatabaseStore';
+>>>>>>> 6c3cdc7b (Initial commit)
 import { Area, AreaChart, ResponsiveContainer, Tooltip, PieChart, Pie, Cell } from 'recharts';
 import { fadeUp, stagger, slideRight } from '@/lib/animations';
 import Link from 'next/link';
 
 export default function AdminDashboard() {
+<<<<<<< HEAD
+=======
+    const { reports } = useDatabaseStore();
+>>>>>>> 6c3cdc7b (Initial commit)
     const [selectedCase, setSelectedCase] = useState(null);
 
     const statCards = [
@@ -24,6 +34,7 @@ export default function AdminDashboard() {
         { label: "Avg Resolution", val: stats.avgResolutionDays, sfx: " days", icon: TrendingUp, col: "text-secondary", bg: "bg-secondary/20", glow: "none" }
     ];
 
+<<<<<<< HEAD
     const highCases = complaints.filter(c => c.riskScore >= 70).slice(0, 4);
 
     return (
@@ -34,6 +45,26 @@ export default function AdminDashboard() {
                     <p className="text-muted">Real-time overview of campus safety reports.</p>
                 </div>
                 <GlowButton variant="ghost" className="text-xs h-9">Download Report</GlowButton>
+=======
+    // Read real reports from the Zustand store
+    const highCases = reports.map((r, i) => ({
+        ...r,
+        trackingId: r.id,
+        riskScore: r.status === 'pending' ? 80 + i : 40,
+        createdAt: r.createdAt
+    })).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    return (
+        <div className="p-8 max-w-[1600px] mx-auto space-y-8 relative">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="flex justify-between items-end relative z-10">
+                <div>
+                    <h1 className="text-4xl font-black mb-1 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">Command Center</h1>
+                    <p className="text-muted font-medium text-lg">Real-time overview of campus safety infrastructure.</p>
+                </div>
+                <GlowButton variant="ghost" className="text-sm px-6 h-10 border-white/10 hover:bg-white/5">Export Intelligence</GlowButton>
+>>>>>>> 6c3cdc7b (Initial commit)
             </div>
 
             {stats.flagged > 0 && (
@@ -51,6 +82,7 @@ export default function AdminDashboard() {
                 </motion.div>
             )}
 
+<<<<<<< HEAD
             <motion.div variants={stagger} initial="hidden" animate="visible" className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {statCards.map((s, i) => (
                     <GlassCard key={i} glow={s.glow as any} className="p-5 flex flex-col justify-between relative overflow-hidden group">
@@ -63,6 +95,21 @@ export default function AdminDashboard() {
                         </div>
                         <AnimatedCounter target={s.val} suffix={s.sfx} />
                         <span className="text-xs text-muted font-medium uppercase mt-2">{s.label}</span>
+=======
+            <motion.div variants={stagger} initial="hidden" animate="visible" className="grid grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
+                {statCards.map((s, i) => (
+                    <GlassCard key={i} glow={s.glow as any} className="p-6 flex flex-col justify-between relative overflow-hidden group border-white/5 bg-surface/30 hover:-translate-y-1 transition-transform duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="flex justify-between items-start mb-6">
+                            <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center relative shadow-inner`}>
+                                {s.anim && <div className="absolute inset-0 border border-danger/50 rounded-xl animate-[pulse-ring_2s_infinite]" />}
+                                <s.icon className={`w-5 h-5 ${s.col}`} />
+                            </div>
+                            {i === 0 && <span className="text-[10px] font-black tracking-widest uppercase text-success bg-success/10 px-3 py-1 rounded-full border border-success/20">{stats.monthlyGrowth}</span>}
+                        </div>
+                        <AnimatedCounter target={s.val} suffix={s.sfx} />
+                        <span className="text-[11px] text-muted font-black uppercase tracking-widest mt-3">{s.label}</span>
+>>>>>>> 6c3cdc7b (Initial commit)
                     </GlassCard>
                 ))}
             </motion.div>
@@ -111,6 +158,7 @@ export default function AdminDashboard() {
                 </GlassCard>
             </div>
 
+<<<<<<< HEAD
             <GlassCard className="overflow-hidden">
                 <div className="p-6 border-b border-muted/10 bg-surface/50">
                     <h3 className="text-lg font-bold">High Priority Escalations</h3>
@@ -129,6 +177,33 @@ export default function AdminDashboard() {
                             <div className="flex items-center gap-6 relative z-10 w-1/3 justify-end">
                                 <StatusBadge status={c.status} />
                                 <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 hidden md:block">View &rarr;</span>
+=======
+            <GlassCard className="overflow-hidden border-white/5 bg-surface/20 shadow-2xl mt-8">
+                <div className="p-6 border-b border-white/5 bg-black/20 flex justify-between items-center">
+                    <h3 className="text-lg font-black tracking-tight text-white">Live Institutional Reports</h3>
+                    <span className="bg-danger/10 text-danger border border-danger/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">{highCases.length} Total Reports</span>
+                </div>
+                <div className="divide-y divide-white/5">
+                    {highCases.length === 0 && (
+                        <div className="p-8 text-center text-muted">No reports filed yet. Submissions will appear here dynamically.</div>
+                    )}
+                    {highCases.map((c, i) => (
+                        <motion.div key={c.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} onClick={() => setSelectedCase(c as any)} className="p-5 flex items-center justify-between hover:bg-white/5 group cursor-pointer border-l-4 border-transparent hover:border-danger transition-all relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-danger/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="flex items-center gap-6 relative z-10 w-2/5">
+                                <span className="font-mono text-bright font-black text-sm tracking-widest flex flex-col gap-1">
+                                    <span>Track ID: {c.trackingId}</span>
+                                    <span className="text-xs text-gold">Submitted By: {c.studentId}</span>
+                                </span>
+                                <span className="text-xs font-bold uppercase tracking-widest text-muted hidden lg:block bg-surface/50 px-3 py-1 rounded-md border border-white/5">{c.category}</span>
+                            </div>
+                            <div className="flex items-center gap-4 relative z-10 w-1/5 justify-center">
+                                <RiskBadge score={c.riskScore} />
+                            </div>
+                            <div className="flex items-center gap-8 relative z-10 w-1/3 justify-end">
+                                <StatusBadge status={c.status} />
+                                <span className="text-xs text-primary font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 hidden md:block">Inspect &rarr;</span>
+>>>>>>> 6c3cdc7b (Initial commit)
                             </div>
                         </motion.div>
                     ))}
